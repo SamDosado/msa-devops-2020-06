@@ -4,7 +4,14 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+  branches:
+    include:
+    - features/* # pipeline is triggered by any branch that fits this description. E.g. features/database-connection would trigger the pipeline
+    exclude:
+    - features/experimental/* # ignore any commits push to branches that fit this pattern. E.g. a commit pushed to features/experimental/database-connection would be ignored
+  paths:
+    exclude:
+    - README.md # This tells the pipeline not to trigger if the only change was made was made to the README.md file regardless of on which branch the change is made.
 
 variables:
   rootDir: 'my-app'
